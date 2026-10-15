@@ -7,124 +7,122 @@
   <title>우주 탐험 퀴즈</title>
   <style>
     :root {
-      color-scheme: dark light;
-      --bg: #080b18;
-      --card: rgba(18, 24, 52, .9);
-      --card-soft: rgba(255, 255, 255, .06);
-      --text: #f7f8ff;
-      --muted: #aeb6d5;
-      --line: rgba(255, 255, 255, .15);
-      --accent: #8e7dff;
-      --accent-2: #ed6bd1;
-      --correct: #4fe19c;
-      --wrong: #ff6e8a;
-    }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #eef1ff;
-        --card: rgba(255, 255, 255, .88);
-        --card-soft: rgba(71, 76, 145, .07);
-        --text: #171a39;
-        --muted: #626984;
-        --line: rgba(52, 59, 112, .15);
-      }
-      body::before { opacity: .35; }
+      color-scheme: light;
+      --bg: #f4f6f8;
+      --card: #fff;
+      --card-soft: #f7f8fa;
+      --text: #191f28;
+      --muted: #6b7684;
+      --line: #e5e8eb;
+      --accent: #1b64da;
+      --accent-soft: #edf5ff;
+      --correct: #16835d;
+      --correct-soft: #e8f7f0;
+      --wrong: #b42318;
+      --wrong-soft: #fff0f0;
     }
 
     * { box-sizing: border-box; }
     body {
       min-height: 100vh;
       margin: 0;
-      padding: 32px 16px 56px;
+      padding: 56px 20px 64px;
       overflow-x: hidden;
       background: var(--bg);
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      font-size: 16px;
       line-height: 1.5;
     }
     body::before {
       position: fixed;
-      inset: 0;
+      inset: 0 0 auto;
+      height: 280px;
       z-index: -1;
-      background:
-        radial-gradient(circle at 50% -10%, #624bb0 0, transparent 38%),
-        radial-gradient(circle at 100% 80%, #df4fa3 0, transparent 26%);
+      background: linear-gradient(180deg, #eaf3ff 0, rgba(244, 246, 248, 0) 100%);
       content: "";
-      opacity: .6;
     }
-    .shell { width: min(100%, 620px); margin: 0 auto; }
-    header { margin: 0 0 24px; text-align: center; }
+    .shell { width: min(100%, 560px); margin: 0 auto; }
+    header { margin: 0 0 28px; }
     .eyebrow {
-      color: var(--correct);
-      font-size: 12px;
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
+      letter-spacing: -.01em;
     }
-    h1, h2, h3 { margin: 0; line-height: 1.1; }
-    h1 { margin-top: 8px; font-size: clamp(2.4rem, 10vw, 4rem); letter-spacing: -.07em; }
-    h1 span { color: var(--accent-2); }
-    header p { max-width: 460px; margin: 13px auto 0; color: var(--muted); }
+    h1, h2, h3 { margin: 0; line-height: 1.35; }
+    h1 { font-size: clamp(28px, 7vw, 36px); font-weight: 750; letter-spacing: -.045em; }
+    h1 span { color: var(--accent); }
+    header p { max-width: 460px; margin: 8px 0 0; color: var(--muted); }
     .card {
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: clamp(22px, 5vw, 36px);
+      border: 1px solid rgba(25, 31, 40, .04);
+      border-radius: 24px;
+      padding: clamp(22px, 6vw, 32px);
       background: var(--card);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, .25), inset 0 1px rgba(255, 255, 255, .08);
-      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 28px rgba(25, 31, 40, .06);
     }
-    .topline { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
-    .label { margin: 0 0 7px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-    h2 { font-size: 21px; }
-    .score { min-width: 76px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 11px; text-align: right; }
-    .score small { display: block; color: var(--muted); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
-    .score strong { color: var(--accent-2); font-size: 22px; }
-    .progress-wrap { margin: 25px 0 30px; }
-    .progress-meta { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--muted); font-size: 12px; }
-    .progress-track { height: 8px; overflow: hidden; border-radius: 99px; background: var(--card-soft); }
-    .progress { width: 10%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .35s ease; }
-    .category { margin: 0 0 9px; color: var(--accent-2); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    h3 { margin-bottom: 22px; color: #ff4f6d; font-size: clamp(21px, 5vw, 28px); letter-spacing: -.035em; }
+    .topline { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .label { margin: 0 0 4px; color: var(--muted); font-size: 13px; font-weight: 600; }
+    h2 { font-size: 20px; font-weight: 700; letter-spacing: -.025em; }
+    .score { min-width: 82px; padding: 8px 12px; border-radius: 14px; background: var(--card-soft); text-align: right; }
+    .score small { display: block; color: var(--muted); font-size: 12px; }
+    .score strong { color: var(--accent); font-size: 22px; font-variant-numeric: tabular-nums; }
+    .progress-wrap { margin: 26px 0 30px; }
+    .progress-meta { display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--muted); font-size: 13px; }
+    .progress-track { height: 6px; overflow: hidden; border-radius: 99px; background: #edf0f2; }
+    .progress { width: 10%; height: 100%; border-radius: inherit; background: var(--accent); transition: width .3s ease; }
+    .category { margin: 0 0 8px; color: var(--accent); font-size: 13px; font-weight: 700; }
+    h3 { margin-bottom: 22px; color: var(--text); font-size: clamp(20px, 5vw, 24px); font-weight: 700; letter-spacing: -.035em; }
     .answers { display: grid; gap: 10px; }
     .answer, .button {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 14px;
       color: var(--text);
       cursor: pointer;
       font: inherit;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      transition: border-color .16s ease, background-color .16s ease, transform .16s ease;
     }
-    .answer { padding: 14px 16px; background: var(--card-soft); text-align: left; }
-    .answer:hover:not(:disabled) { border-color: var(--accent); background: rgba(142, 125, 255, .16); transform: translateY(-2px); }
+    .answer { width: 100%; min-height: 54px; padding: 14px 16px; background: var(--card); text-align: left; }
+    .answer:hover:not(:disabled) { border-color: #9cc5ff; background: var(--accent-soft); }
+    .answer:focus-visible, .button:focus-visible { outline: 3px solid rgba(49, 130, 246, .35); outline-offset: 3px; }
     .answer:disabled { cursor: default; }
-    .answer.correct { border-color: var(--correct); background: rgba(79, 225, 156, .16); color: var(--correct); animation: correct-pop .38s ease; }
-    .answer.wrong { border-color: var(--wrong); background: rgba(255, 110, 138, .15); color: var(--wrong); animation: wrong-shake .42s ease; }
-    .feedback { min-height: 24px; margin: 17px 0 0; color: var(--muted); }
+    .answer.correct { border-color: #93d6b9; background: var(--correct-soft); color: var(--correct); animation: correct-pop .3s ease; }
+    .answer.wrong { border-color: #f0aaaa; background: var(--wrong-soft); color: var(--wrong); animation: wrong-shake .35s ease; }
+    .feedback { min-height: 24px; margin: 16px 0 0; color: var(--muted); font-size: 14px; }
     .feedback.correct-text { color: var(--correct); }
     .feedback.wrong-text { color: var(--wrong); }
-    .button { padding: 12px 17px; border: 0; background: linear-gradient(100deg, var(--accent), var(--accent-2)); color: white; font-weight: 700; box-shadow: 0 8px 22px rgba(142, 125, 255, .25); }
-    .button:hover { transform: translateY(-2px); }
-    .next { margin-top: 8px; }
+    .button { min-height: 50px; padding: 12px 20px; border: 0; background: var(--accent); color: #fff; font-weight: 700; box-shadow: 0 4px 10px rgba(49, 130, 246, .18); }
+    .button:hover { background: #1b64da; }
+    .button:active { transform: scale(.98); }
+    .next { margin-top: 10px; }
     .results { text-align: center; }
-    .reaction { display: grid; width: 76px; height: 76px; margin: 0 auto 18px; place-items: center; border-radius: 50%; background: rgba(237, 107, 209, .14); font-size: 42px; }
-    .results h2 { font-size: 32px; }
-    .results-copy { margin: 11px 0 20px; color: var(--muted); }
-    .final-score { margin: 4px 0 25px; color: var(--muted); }
-    .final-score strong { display: block; color: var(--accent-2); font-size: 58px; line-height: 1; }
+    .reaction { display: grid; width: 68px; height: 68px; margin: 0 auto 18px; place-items: center; border-radius: 22px; background: var(--accent-soft); font-size: 36px; }
+    .results h2 { font-size: 28px; }
+    .results .label { color: var(--accent); }
+    .results-copy { margin: 10px 0 24px; color: var(--muted); }
+    .final-score { margin: 0 0 18px; color: var(--muted); }
+    .final-score strong { display: block; margin-bottom: 4px; color: var(--accent); font-size: 56px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+    .best-score { margin: 0 0 26px; color: var(--muted); }
+    .best-score strong { color: var(--text); font-variant-numeric: tabular-nums; }
     [hidden] { display: none !important; }
     @keyframes correct-pop { 0% { transform: scale(.98); } 55% { transform: scale(1.025); } 100% { transform: scale(1); } }
     @keyframes wrong-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 50% { transform: translateX(8px); } 75% { transform: translateX(-4px); } }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    @media (max-width: 420px) {
+      body { padding: 32px 16px 40px; }
+      .topline { align-items: flex-start; }
+      .score { min-width: 72px; }
+      .card { border-radius: 20px; }
+    }
   </style>
 </head>
 <body>
   <main class="shell">
     <header>
       <div class="eyebrow">✦ 미션 컨트롤 온라인</div>
-      <h1>Cosmic <span>Explorer</span></h1>
-      <p>열 가지 질문, 하나의 미션. 당신의 우주 지식은 어디까지 도달할까요?</p>
+      <h1>우주 탐험 <span>퀴즈</span></h1>
+      <p>열 가지 질문에 답하고, 우주 지식을 확인해 보세요.</p>
     </header>
 
     <section class="card" id="quiz" aria-live="polite">
@@ -149,6 +147,7 @@
       <h2 id="result-title">멋진 비행이었어요!</h2>
       <p class="results-copy" id="result-copy"></p>
       <div class="final-score"><strong id="final-score">0</strong>점 획득</div>
+      <p class="best-score">최고 점수: <strong id="best-score">0</strong>점</p>
       <button class="button" id="restart" type="button">다시 출발하기</button>
     </section>
   </main>
@@ -169,6 +168,20 @@
       ];
       let current = 0, score = 0, locked = false;
       const $ = id => document.getElementById(id);
+      const highScoreKey = "spaceQuizHighScore";
+      let bestScore = loadBestScore();
+
+      function loadBestScore() {
+        try {
+          const storedScore = window.localStorage.getItem(highScoreKey);
+          if (storedScore === null) return 0;
+          const parsedScore = Number(storedScore);
+          return Number.isInteger(parsedScore) && parsedScore >= 0 ? parsedScore : 0;
+        } catch (error) {
+          console.warn("최고 점수를 불러오지 못했습니다.", error);
+          return 0;
+        }
+      }
 
       function render() {
         const [category, question, answers] = questions[current];
@@ -218,6 +231,14 @@
       }
 
       function finish() {
+        if (score > bestScore) {
+          bestScore = score;
+          try {
+            window.localStorage.setItem(highScoreKey, String(bestScore));
+          } catch (error) {
+            console.warn("최고 점수를 저장하지 못했습니다.", error);
+          }
+        }
         $("quiz").hidden = true;
         $("results").hidden = false;
         const ratio = score / (questions.length * 100);
@@ -229,6 +250,7 @@
         $("result-title").textContent = outcome[1];
         $("result-copy").textContent = `${outcome[2]} ${questions.length}문제 중 ${score / 100}문제를 맞혔습니다.`;
         $("final-score").textContent = score;
+        $("best-score").textContent = bestScore;
       }
 
       $("next").addEventListener("click", () => current === questions.length - 1 ? finish() : (current++, render()));
